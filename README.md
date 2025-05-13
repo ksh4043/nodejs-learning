@@ -120,10 +120,8 @@ app.get('/user/:id', (req, res) => {// get 방식이기 때문에 주소창에�
 사용자의 id를 파라미터로 받을 때에는 :id
 
 query 요청 예시
-```
-http://localhost:3000/user/asdf?q=sikgong&name=ssk&age=27
-```
-![alt text](image.png)
+
+![alt text](queryExample.png)
 
 
 응답이 정상적으로 이루어지면 res 객체의 send() 메소드 호출해서 클라이언트에 응답 -> localhost:3000 으로 Hello World 전달
@@ -169,3 +167,73 @@ app.get('/sound/:name', (req, res) => {
 현재 req의 params에는 name 하나만 존재(요청 시 받는 필드명이 :name 하나기 때문)하여 name 변수만 선언 및 할당
 라우팅 시에 여러 파라미터가 넘어오는 경우, 순서에 맞춰서 할당하면 됨
 
+## CORS
+HTML 파일에서 서버로 요청하였을 때, 문제 상황을 대비해 기본적으로 요청을 막아둠
+따라서 어떤 요청이 들어왔을 때, 응답이 잘 이루어지도록 CORS 설정이 필요함
+
+cors 설치
+
+```
+npm install cors
+```
+
+```
+var cors = require('cors')
+
+app.use(cors())
+```
+
+cors 함수 호출 시 파라미터를 지정하지 않으면 모든 요청과 접근을 허용
+
+
+## index.html
+
+```
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NodeJs API Test</title>
+</head>
+<body>
+    <h1 id="sound"></h1>
+    <input id="name" type="text">
+    <button onclick="getSound()">API 요청</button>
+
+    <script>
+        function getSound(){
+            const name = document.getElementById("name").value
+            fetch(`http://localhost:3000/sound/${name}`)
+            .then((response => response.json()))
+            .then((data) => {
+                console.log(data.sound)
+                document.getElementById("sound").innerHTML = data.sound
+            })
+        }
+    </script>
+</body>
+</html>
+```
+
+fetch() : 비동기통신 방식, 라우팅 경로로 서버에 요청
+응답 객체 response에 body(실제로 응답받은 데이터)에 접근하기 위해 JSON으로 파싱
+data는 파싱된 JSON 내용 (현재 코드에서는 { sound : '멍멍' })
+
+## response
+
+| 속성           | 설명                                          |
+| ------------ | ------------------------------------------- |
+| `status`     | HTTP 상태 코드 (예: 200, 404, 500 등)             |
+| `statusText` | 상태 메시지 (예: "OK", "Not Found")               |
+| `headers`    | 응답 헤더 정보                                    |
+| `ok`         | `status`가 200\~299 사이인지 여부 (`true`/`false`) |
+| `url`        | 응답 받은 URL                                   |
+| `json()`     | 응답 body를 JSON으로 파싱하는 메서드                    |
+| `text()`     | 응답 body를 텍스트로 파싱하는 메서드                      |
+| `blob()`     | 응답을 파일(blob)로 받는 메서드 (예: 이미지 등)             |
+
+## 실행 화면
+![alt text](requestAPI.png)
+
+![alt text](resImage.png)
