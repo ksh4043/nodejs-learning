@@ -1,31 +1,31 @@
 # Node.js-Learnigng
 
 ## Node.js 설치 경로
-https://nodejs.org/ko/
+https://nodejs.org/ko/  
 
 ## npm(Node Package Manager)
-이미 만들어진 모듈의 저장소
-터미널에서 인스톨 후 사용할 수 있음
-npm install ["module-name"]
+이미 만들어진 모듈의 저장소  
+터미널에서 인스톨 후 사용할 수 있음  
+npm install ["module-name"]  
 
 ## npm init
-package.json -> 설치된 모듈들을 정리해주는 메모장 같은 역할
+package.json -> 설치된 모듈들을 정리해주는 메모장 같은 역할  
 
 npm init 사용 시 에러
 ```
 npm : 이 시스템에서 스크립트를 실행할 수 없으므로 C:\Program Files\nodejs\npm.ps1 파일을 로드할 수 없습니다. 자세한 내용은 about_Execution_Policies(https://go.microsoft.com/fwlink/?LinkID=135170)를 참조하십시오.
 ```
 
-해결 방법
-Window PowerShell 관리자 권한으로 실행 후
-Set-ExecutionPolicy RemoteSigned 입력
-변경 여부 y 입력
+해결 방법  
+Window PowerShell 관리자 권한으로 실행 후  
+Set-ExecutionPolicy RemoteSigned 입력  
+변경 여부 y 입력  
 
-설치 옵션
--g : 현재 프로젝트 뿐만 아니라 로컬 PC 전체에서 해당 모듈을 사용할 수 있음 -> 전역 설치 시에 충돌 위험이 있으므로 프로젝트별로 설치 권장
+설치 옵션  
+-g : 현재 프로젝트 뿐만 아니라 로컬 PC 전체에서 해당 모듈을 사용할 수 있음 -> 전역 설치 시에 충돌 위험이 있으므로 프로젝트별로 설치 권장  
 
-삭제 명령
-npm uninstall ["module-name"]
+삭제 명령  
+npm uninstall ["module-name"]  
 
 ## express
 웹 프레임워크 : 프론트엔드에서 백엔드로 요청이 있을 시, 응답해주는 역할
@@ -81,8 +81,8 @@ app.listen(3000)            // 3000번 포트에서 서버 실행
 ```
 const express = require("express")
 ```
-require("module-name") : Node.js에서 외부 모듈 또는 파일을 불러오는 함수
-express 모듈을 가져옴
+require("module-name") : Node.js에서 외부 모듈 또는 파일을 불러오는 함수  
+express 모듈을 가져옴  
 
 ```
 const app = express()
@@ -94,13 +94,13 @@ app.get('/', (req, res) => {
   res.send('Hello World')
 })
 ```
-app.get() -> HTTP 메소드 :
-GET 방식과 POST 방식이 있음
-GET : 주소창으로 데이터 전달
-POST : body로 데이터 전달
-'/' -> Routing :
-웹 경로. '/' 루트 경로로 기본 경로임.
-() => {} : 콜백함수
+app.get() -> HTTP 메소드 :  
+GET 방식과 POST 방식이 있음  
+GET : 주소창으로 데이터 전달  
+POST : body로 데이터 전달  
+'/' -> Routing :  
+웹 경로. '/' 루트 경로로 기본 경로임.  
+() => {} : 콜백함수  
 
 ```
 app.get('/user/:id', (req, res) => {// get 방식이기 때문에 주소창에서 입력하는 값 -> id를 req 객체에 담아서 서버에 요청
@@ -117,11 +117,11 @@ app.get('/user/:id', (req, res) => {// get 방식이기 때문에 주소창에�
 })
 ```
 
-사용자의 id를 파라미터로 받을 때에는 :id
+사용자의 id를 파라미터로 받을 때에는 :id  
+  
+query 요청 예시  
 
-query 요청 예시
-
-![alt text](queryExample.png)
+![alt text](queryExample.png)  
 
 
 응답이 정상적으로 이루어지면 res 객체의 send() 메소드 호출해서 클라이언트에 응답 -> localhost:3000 으로 Hello World 전달
@@ -161,16 +161,16 @@ app.get('/sound/:name', (req, res) => {
 })
 ```
 
-{ 변수1, 변수2, 변수3 ... }
-객체 구조 분해 할당 : 객체에서 값을 뽑아서 변수로 바로 할당하는 문법
-할당하려는 수와 맞춰서 변수를 선언
-현재 req의 params에는 name 하나만 존재(요청 시 받는 필드명이 :name 하나기 때문)하여 name 변수만 선언 및 할당
-라우팅 시에 여러 파라미터가 넘어오는 경우, 순서에 맞춰서 할당하면 됨
-
+{ 변수1, 변수2, 변수3 ... }  
+객체 구조 분해 할당 : 객체에서 값을 뽑아서 변수로 바로 할당하는 문법  
+할당하려는 수와 맞춰서 변수를 선언  
+현재 req의 params에는 name 하나만 존재(요청 시 받는 필드명이 :name 하나기 때문)하여 name 변수만 선언 및 할당  
+라우팅 시에 여러 파라미터가 넘어오는 경우, 순서에 맞춰서 할당하면 됨  
+  
 ## CORS
-HTML 파일에서 서버로 요청하였을 때, 문제 상황을 대비해 기본적으로 요청을 막아둠
-따라서 어떤 요청이 들어왔을 때, 응답이 잘 이루어지도록 CORS 설정이 필요함
-
+HTML 파일에서 서버로 요청하였을 때, 문제 상황을 대비해 기본적으로 요청을 막아둠  
+따라서 어떤 요청이 들어왔을 때, 응답이 잘 이루어지도록 CORS 설정이 필요함  
+  
 cors 설치
 
 ```
@@ -182,10 +182,10 @@ var cors = require('cors')
 
 app.use(cors())
 ```
-
-cors 함수 호출 시 파라미터를 지정하지 않으면 모든 요청과 접근을 허용
-
-
+  
+cors 함수 호출 시 파라미터를 지정하지 않으면 모든 요청과 접근을 허용  
+  
+  
 ## index.html
 
 ```
@@ -215,11 +215,11 @@ cors 함수 호출 시 파라미터를 지정하지 않으면 모든 요청과 �
 </body>
 </html>
 ```
-
-fetch() : 비동기통신 방식, 라우팅 경로로 서버에 요청
-응답 객체 response에 body(실제로 응답받은 데이터)에 접근하기 위해 JSON으로 파싱
-data는 파싱된 JSON 내용 (현재 코드에서는 { sound : '멍멍' })
-
+  
+fetch() : 비동기통신 방식, 라우팅 경로로 서버에 요청  
+응답 객체 response에 body(실제로 응답받은 데이터)에 접근하기 위해 JSON으로 파싱  
+data는 파싱된 JSON 내용 (현재 코드에서는 { sound : '멍멍' })  
+  
 ## response
 
 | 속성           | 설명                                          |
@@ -232,8 +232,8 @@ data는 파싱된 JSON 내용 (현재 코드에서는 { sound : '멍멍' })
 | `json()`     | 응답 body를 JSON으로 파싱하는 메서드                    |
 | `text()`     | 응답 body를 텍스트로 파싱하는 메서드                      |
 | `blob()`     | 응답을 파일(blob)로 받는 메서드 (예: 이미지 등)             |
-
+  
 ## 실행 화면
-![alt text](requestAPI.png)
-
+![alt text](requestAPI.png)  
+  
 ![alt text](resImage.png)
